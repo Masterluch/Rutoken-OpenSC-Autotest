@@ -1,4 +1,4 @@
 /*
 !/.gitignore
-!/test_data
 !/certificate_info.txt
+!/allkeys_pkcs11-tool.bat

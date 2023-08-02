@@ -30,7 +30,7 @@ def test_decryption(reset_token):
     if (process.returncode != 0): raise Exception(process.stderr)
 
     # Генерация файла размером 245 байт
-    # ByteFileTool.generate_byte_file("./testing_data/test_data", 245)
+    ByteFileTool.generate_byte_file("./testing_data/test_data", 245)
 
     # Шифрование в OpenSSL
     process = subprocess.run(["openssl", "pkeyutl",

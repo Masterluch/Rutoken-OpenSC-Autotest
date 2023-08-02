@@ -26,7 +26,10 @@ def test_sign(reset_token):
                               stderr=subprocess.PIPE)
     if (process.returncode != 0): raise Exception(process.stderr)
 
+	# Подпись
+	# Для ввода пин-кода ипользуется файл user_pin, который подаётся на stdin
     file_user_pin = open("./testing_data/user_pin.txt")
+	# Параметр "--pin -" позволяет считывать пин-код из stdin
     process = subprocess.run(["C:\\Program Files\\OpenSC Project\\OpenSC\\tools\\pkcs15-crypt.exe",
                                 "-s", "-k", "45",
                                 "-i", "./testing_data/test_data.dgst",
