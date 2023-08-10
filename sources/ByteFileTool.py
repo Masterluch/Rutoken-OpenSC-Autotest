@@ -13,8 +13,6 @@ class ByteFileTool:
         with open(file_name, 'wb') as file:
             file.write(os.urandom(file_size_in_bytes))
 
-        # print("Byte file has been created.")
-
     @staticmethod
     def comparsion_files_by_bytes(file_name_1: str, file_name_2: str) -> bool:
         '''
@@ -24,9 +22,6 @@ class ByteFileTool:
         with open(file_name_1, "rb") as file1, open(file_name_2, "rb") as file2:
             ba_file1 = bytearray(file1.read())
             ba_file2 = bytearray(file2.read())
-
-            # print(len(ba_file1))
-            # print(len(ba_file2))
 
             if len(ba_file1) != len(ba_file2): return False
 

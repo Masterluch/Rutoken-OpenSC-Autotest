@@ -2,3 +2,4 @@
 !/.gitignore
 !/certificate_info.txt
 !/allkeys_pkcs11-tool.bat
+!/allkeys_pkcs11-tool.sh

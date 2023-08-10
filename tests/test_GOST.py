@@ -3,9 +3,10 @@ import sys
 
 sys.path.append("..\\sources")
 from ByteFileTool import ByteFileTool
+from execute import execute
 
 
-def test_GOST(reset_token):
+def test_GOST(reset_token, define_os):
     '''
     Тест ГОСТа.
     '''
@@ -13,12 +14,18 @@ def test_GOST(reset_token):
     # Генерация файла in.txt
     ByteFileTool.generate_byte_file("./testing_data/in.txt", 245)
 
-    # Перебор параметров pkcs11-tool из файла pkcs11_keys_gost.bat
-    with open("./testing_data/allkeys_pkcs11-tool.bat", "r") as file_keys:
+    # Выбор файла для парсинга в зависимости от ОС
+    file_path = "./testing_data/allkeys_pkcs11-tool"
+    if (define_os == "win32"): file_path += ".bat"
+    elif (define_os == "linux"): file_path += ".sh"
+    else: raise Exception("Unsupported OS")
+
+    # Перебор параметров pkcs11-tool из файла allkeys_pkcs11-tool
+    with open(file_path, "r") as file_keys:
         for arg in file_keys.readlines():
             if (arg == "\n"): continue
 
-            cmd = ["C:\\Program Files\\OpenSC Project\\OpenSC\\tools\\pkcs11-tool.exe"] + arg[12:len(arg)].split()
+            cmd = arg.split()
 
             # Исправление путей к вспомогательным файлам
             for i in range(len(cmd)):
@@ -26,7 +33,6 @@ def test_GOST(reset_token):
                     if (cmd[i][len(cmd[i])-4:len(cmd[i])] == ".txt"):
                         cmd[i] = "./testing_data/"+cmd[i]
 
-            process = subprocess.run(cmd, stderr=subprocess.PIPE)
-            if (process.returncode != 0): raise Exception(process.stderr)
+            execute(cmd, define_os)
 
     assert(True)
