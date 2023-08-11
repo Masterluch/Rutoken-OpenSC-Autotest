@@ -13,7 +13,7 @@ def test_work_with_binary_files(reset_token, define_os):
 
     # Создание бинарного файла, доступ к которому осуществляется по пон-коду, на основе объекта данных test_data
     execute(["pkcs11-tool",
-             "--module", "./rtpkcs11ecp.dll",
+             "--module", "./rtpkcs11ecp",
              "--login", "--pin", "12345678",
              "--write-object", "./testing_data/test_data",
              "--type", "data",
@@ -22,7 +22,7 @@ def test_work_with_binary_files(reset_token, define_os):
 
     # Чтение бинарного файла (Для Linux убрать --module) и запись резульата в файл data_from_token
     process = execute(["pkcs11-tool",
-             "--module", "./rtpkcs11ecp.dll",
+             "--module", "./rtpkcs11ecp",
              "--login", "--pin", "12345678",
              "--read-object",
              "--type", "data",
