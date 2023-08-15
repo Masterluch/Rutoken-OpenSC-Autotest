@@ -41,5 +41,3 @@ def test_work_with_certificates(reset_token, define_os):
 
     # Сравнение записанного сертификата (tester.crt) и прочитанного с токена (certificate_from_token.crt)
     assert(ByteFileTool.comparsion_files_by_bytes("./testing_data/tester.crt", "./testing_data/certificate_from_token.crt"))
-
-    assert(True)

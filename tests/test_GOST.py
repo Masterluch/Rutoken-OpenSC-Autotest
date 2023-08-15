@@ -33,6 +33,17 @@ def test_GOST(reset_token, define_os):
                     if (cmd[i][len(cmd[i])-4:len(cmd[i])] == ".txt"):
                         cmd[i] = "./testing_data/"+cmd[i]
 
-            execute(cmd, define_os)
+            process = execute(cmd, define_os, stdout=subprocess.PIPE)
+
+            '''
+            При результате "Invalid signature" в команде --verify
+            В Linux выбрасывается исключение и returncode = 1
+            В Windows печатается "Invalid signature" и returncode = 0
+            '''
+
+            # Проверка резульатата --verify
+            if ("--verify" in cmd):
+                if (b"Invalid signature" in process.stdout):
+                    raise Exception(process.stdout)
 
     assert(True)

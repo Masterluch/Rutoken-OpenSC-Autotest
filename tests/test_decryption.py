@@ -18,7 +18,7 @@ def test_decryption(reset_token, define_os):
              "-u", "decrypt",
              "--id", "42",
              "--pin", "12345678",
-             "-v", "-r3"], define_os)
+             "-v"], define_os)
 
     # Извлечение открытого ключа
     execute(["pkcs15-tool",
